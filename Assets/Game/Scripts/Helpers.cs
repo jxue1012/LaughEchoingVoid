@@ -21,7 +21,7 @@ public delegate void TimeChangeFunc(int value);
 
 public enum EnumPlayerStatus
 {
-    Nomral, Mask, Drug, Drunk, H
+    Nomral, Mask, Drug, Drunk, H, Tired
 }
 
 public enum EnumCharacterType

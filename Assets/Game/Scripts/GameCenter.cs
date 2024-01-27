@@ -9,10 +9,13 @@ public class GameCenter : MonoBehaviour
     public static GameCenter Instance;
 
     //Managers
+    public SceneManager sceneManager;
     public PlayerManager playerManager;
     public CamManager camManager;
     public AudioManager audioManager;
     public VfxManager vfxManager;
+
+    public UIManager uIManager;
 
 
 
@@ -29,7 +32,10 @@ public class GameCenter : MonoBehaviour
 
     private void Start()
     {
-
+        StartNight();
+        var p = GameCenter.Instance.playerManager.Player;
+        p.CanMask = true;
+        p.ChangeStatus(EnumPlayerStatus.Tired);
     }
 
     private void BeforeInit()
@@ -41,9 +47,12 @@ public class GameCenter : MonoBehaviour
     {
         playerManager.Init();
         camManager.Init();
+        sceneManager.Init();
 
         audioManager.Init();
         vfxManager.Init();
+
+        uIManager.Init();
 
     }
 
@@ -78,30 +87,6 @@ public class GameCenter : MonoBehaviour
     #endregion
 
 
-    // #region ----------- LayerMask -----------------
-    // //Layermask
-    // [Space(15)]
-    // [Header("------ Layer Mask ------")]
-
-    // public bool CheckObjInLayer(GameObject obj, LayerMask lm)
-    // {
-    //     return obj.layer == Mathf.Log(lm.value, 2);
-    // }
-
-    // #endregion
-
-    // #region ---------- Sorting Order ------------
-
-    // [Space(15)]
-    // [Header("------ Sorting Order ------")]
-    // public int BackGroundOrder = 0;
-
-    // public int JigsawNormalOrder = 10;
-    // public int JigsawDragOrder = 100;
-
-
-    // #endregion
-
     #region --------------- Cursor -----------------
     [Space(15)]
     [Header("------ Cursor ------")]
@@ -124,6 +109,26 @@ public class GameCenter : MonoBehaviour
 
     #endregion
 
+    #region ---------- Time ---------------
+
+    public void StartDay()
+    {
+        sceneManager.home.Hide();
+        sceneManager.office.Show();
+        sceneManager.CloseAllStore();
+    }
+
+    public void StartNight()
+    {
+        sceneManager.home.Show();
+        sceneManager.office.Hide();
+        sceneManager.ShowAllStore();
+        var p = playerManager.Player;
+        p.CanMask = true;
+        p.CanAttributeChange = true;
+    }
+
+    #endregion
 
 
 }
