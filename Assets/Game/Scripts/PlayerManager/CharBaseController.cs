@@ -48,10 +48,6 @@ public class CharBaseController : MonoBehaviour
     protected string activeBaseAnim;
     public string ActiveBaseAnim => activeBaseAnim;
 
-    public SpineSkinControl SkinControl;
-
-
-
     protected virtual void InitSpineControl()
     {
 
@@ -62,8 +58,6 @@ public class CharBaseController : MonoBehaviour
     public void InitializeSkin(int seed)
     {
         Random.InitState(seed);
-        SkinControl = this.GetComponentInChildren<SpineSkinControl>();
-        SkinControl.Init();
     }
 
     public void SetFaceDir(Vector2 targetPos)
@@ -100,6 +94,19 @@ public class CharBaseController : MonoBehaviour
         SA.state.GetCurrent(trackIndex).TimeScale = speed;
     }
 
+    public virtual void PlayBaseAnim(string anim, bool loop, float speed = 1f, int trackIndex = 0)
+    {
+       
+        if (activeBaseAnim == anim)
+            return;
+
+        // EmptyFaceAnimTracks();
+        // PlayAlwaysOnFaceAnim();
+
+        SA.AnimationState.SetAnimation(trackIndex, anim, loop);
+        activeBaseAnim = anim;
+
+    }
     public virtual void PlayBaseAnim(EnumAnim animType, bool loop, float speed = 1f, int trackIndex = 0)
     {
         string anim = GameCenter.Instance.playerManager.GetAnimStr(animType);
@@ -126,12 +133,6 @@ public class CharBaseController : MonoBehaviour
     {
         string anim = GameCenter.Instance.playerManager.GetAnimStr(animType);
         SA.AnimationState.AddAnimation(trackIndex, anim, loop, 0);
-    }
-
-
-    public void ChangeSkin(EnumCharSkin skinType)
-    {
-        SkinControl.ChangeSkin(skinType);
     }
 
 

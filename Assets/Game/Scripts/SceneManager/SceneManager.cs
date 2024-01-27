@@ -11,6 +11,8 @@ public class SceneManager : MonoBehaviour
     public Home home;
     public Office office;
 
+    public Transform LeftSidePoint, RightSidePoint;
+
     public void Init()
     {
         foreach (var s in StoreList)
@@ -28,7 +30,7 @@ public class SceneManager : MonoBehaviour
 
     public void ShowAllStore()
     {
-        foreach(var s in StoreList)
+        foreach (var s in StoreList)
             s.Show();
     }
 
@@ -68,6 +70,17 @@ public class SceneManager : MonoBehaviour
             player.PlayIdleAnim();
         });
 
+    }
+
+    public Vector3 GetRandomPositionForNpc()
+    {
+        float minX = LeftSidePoint.position.x;
+        float maxX = RightSidePoint.position.x;
+        float minY = -7f;
+        float maxY = -5f;
+        float x = Random.Range(minX, maxX);
+        float y = Random.Range(minY, maxY);
+        return new Vector3(x, y, 0);
     }
 
 

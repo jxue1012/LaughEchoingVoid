@@ -15,6 +15,7 @@ public class PlayerManager : SerializedMonoBehaviour
     public void Init()
     {
         Player.Init();
+        InitNPC();
     }
 
     public string GetAnimStr(EnumAnim animType)
@@ -32,6 +33,18 @@ public class PlayerManager : SerializedMonoBehaviour
     {
         Player.CanMove = canMove;
     }
+
+    #region ------------- NPC -----------------
+    public List<NpcController> NpcList = new();
+
+    public void InitNPC()
+    {
+        foreach(var npc in NpcList)
+            npc.Init();
+    }
+
+    #endregion
+
 
 }
 

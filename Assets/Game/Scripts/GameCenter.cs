@@ -21,6 +21,7 @@ public class GameCenter : MonoBehaviour
 
 
     //Variables
+    public GlobalSettingSO globalSettingSO;
 
     private void Awake()
     {
@@ -58,7 +59,10 @@ public class GameCenter : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Time.timeScale += 5f;
+        }
     }
 
 

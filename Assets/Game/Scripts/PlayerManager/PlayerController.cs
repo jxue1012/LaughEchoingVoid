@@ -4,12 +4,14 @@ using Sirenix.OdinInspector;
 using Spine;
 using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PlayerController : CharBaseController
 {
 
     public Transform HeadPoint;
+    public SortingGroup sortGroup;
     private Rigidbody2D rb;
 
     public override void Init()
@@ -25,6 +27,7 @@ public class PlayerController : CharBaseController
     protected override void UpdateFunc()
     {
         base.UpdateFunc();
+        sortGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
         UpdateMove();
         if (Input.GetKeyDown(KeyCode.Space) && CanIntact)
         {
@@ -213,7 +216,7 @@ public class PlayerController : CharBaseController
     private float sanTime;
 
     private float defaultAttributeTime = 1f;
-    public float AttributeLoseValue = 1;
+    private int AttributeLoseValue = 1;
     public bool CanAttributeChange;
 
     private void InitAttributes()
@@ -221,6 +224,8 @@ public class PlayerController : CharBaseController
         HP = MaxHP = DefaultMaxHP;
         San = MaxSan = DefaultMaxSan;
         CanAttributeChange = true;
+        defaultAttributeTime = GameCenter.Instance.globalSettingSO.defaultAttributeLoseTime;
+        AttributeLoseValue = GameCenter.Instance.globalSettingSO.AttributeLoseValue;
     }
 
     public void ResetAttributeTimer()
@@ -241,7 +246,7 @@ public class PlayerController : CharBaseController
             if (sanTimer >= defaultAttributeTime)
             {
                 sanTimer = 0;
-                ChangeSan(-1);
+                ChangeSan(-AttributeLoseValue);
             }
         }
         else if (status == EnumPlayerStatus.Tired)
@@ -250,7 +255,7 @@ public class PlayerController : CharBaseController
             if (hpTimer >= defaultAttributeTime)
             {
                 hpTimer = 0;
-                ChangeHP(-1);
+                ChangeHP(-AttributeLoseValue);
             }
         }
     }

@@ -38,12 +38,22 @@ public enum EnumAnim
 {
     ChatBox, MaskOn, MaskOff, NormalMove, NormalIdle, TiredMove, TiredIdle,
     Crazy, DrugMove, DrugIdle, DrunkMove, DrunkIdle,
-    MaskMove, MaskIdle, HMove, HIdle
+    MaskMove, MaskIdle, HMove, HIdle,
+    NPC_HangDie, NPC_FallDie, NPC_Jump, Npc_Idle, 
+    NPC_NormalMove, NPC_TireMove, NPC_CrazyMove, NPC_DrugMove, NPC_DrunkMove,
+    NPC_MaskMove, NPC_HMove
 }
 
 public enum EnumSfxType
 {
-    BGM = 0,
+    BGM0_MainScreen = 0, BGM0_Street,
+    BGM1_Work, BGM1_Night, 
+    SFX_Mask, BGM1_MaskOn,
+    SFX_Drug, BGM1_AfterDrug,
+    SFX_Drink, BGM1_AfterDrink,
+    SFX_H, BGM1_AfterH,
+    BGM1_Sleep,
+    SFX_San, SFX_HP, SFX_Walk
 
 }
 
