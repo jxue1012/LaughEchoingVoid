@@ -33,7 +33,9 @@ public class GlobalSettingSO : SerializedScriptableObject
     public Color HUIColor;
     public float WorkShowTime = 5f;
     public Color WorkUIColor;
-    
+    public float SleepShowTime = 5f;
+    public Color SleepUIColor;
+
 
     [Space(15)]
     [Header("------- 对话图片 -------")]
@@ -42,4 +44,10 @@ public class GlobalSettingSO : SerializedScriptableObject
     [Space(15)]
     [Header("------- 加速设置 -------")]
     public float SpeedUpTimeValue = 8f;
+
+    [Space(15)]
+    [Header("------- 数值 -------")]
+    public int SleepGain = 20;
+    public int WorkLoseMin = 20;
+    public int WorkLoseMax = 30;
 }

@@ -130,14 +130,54 @@ public class Home : MonoBehaviour
 
     public void EndHomeShow()
     {
-        Debug.Log("home show End");
+
         GameCenter.Instance.uIManager.screenTransitionUI.StartTransition(() =>
         {
-            GameCenter.Instance.sceneManager.LeaveHome();
+            StartSleep();
         });
 
     }
 
+    private void LeaveHomeDelay()
+    {
+        int value = GameCenter.Instance.globalSettingSO.SleepGain;
+        GameCenter.Instance.playerManager.Player.ChangeHP(value);
+        GameCenter.Instance.playerManager.Player.ChangeSan(value);
+
+        GameCenter.Instance.sceneManager.LeaveHome();
+    }
+
+    protected bool timePassOn;
+    protected float showTime;
+    protected float timer;
+
+    private void StartSleep()
+    {
+        timePassOn = true;
+        timer = 0;
+        showTime = GameCenter.Instance.globalSettingSO.SleepShowTime;
+        GameCenter.Instance.uIManager.ShowTimeBar(4);
+
+        GameCenter.Instance.audioManager.StopBGM();
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM1_Sleep);
+
+    }
+
+    private void Update()
+    {
+        if (timePassOn)
+        {
+            timer += Time.deltaTime;
+            GameCenter.Instance.uIManager.UpdateTimeBar(timer / showTime);
+            if (timer >= showTime)
+            {
+                timer = 0f;
+                timePassOn = false;
+                GameCenter.Instance.uIManager.HideTimeBar();
+                LeaveHomeDelay();
+            }
+        }
+    }
 
 
 

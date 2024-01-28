@@ -85,8 +85,7 @@ public class SceneManager : MonoBehaviour
         GameCenter.Instance.Day += 1;
         StartDayScene();
         home.Hide();
-
-
+        GameCenter.Instance.audioManager.StopBGM();
 
         GameCenter.Instance.uIManager.screenTransitionUI.EndTransition();
         GameCenter.Instance.playerManager.SetNpcToWalkOnStreet();
@@ -111,8 +110,19 @@ public class SceneManager : MonoBehaviour
         StartNightScene();
         office.Hide();
 
+
         GameCenter.Instance.uIManager.screenTransitionUI.EndTransition();
         var player = GameCenter.Instance.playerManager.Player;
+
+        bool loseHP = Random.Range(0, 100f) > 50f;
+        var so = GameCenter.Instance.globalSettingSO;
+        int value = Random.Range(so.WorkLoseMin, so.WorkLoseMax);
+
+        if (loseHP)
+            player.ChangeHP(-value);
+        else
+            player.ChangeSan(-value);
+
         player.ChangeStatus(EnumPlayerStatus.Tired);
         player.PlayMoveAnim();
         player.SetFaceDir(false);

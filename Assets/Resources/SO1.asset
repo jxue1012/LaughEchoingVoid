@@ -268,6 +268,8 @@ MonoBehaviour:
   HUIColor: {r: 0.9811321, g: 0.31933072, b: 0.70010245, a: 1}
   WorkShowTime: 10
   WorkUIColor: {r: 0.15143289, g: 0.39662695, b: 0.7830189, a: 1}
+  SleepShowTime: 5
+  SleepUIColor: {r: 0.30635712, g: 1, b: 0.054901958, a: 1}
   ChatBoxList:
   - {fileID: 21300000, guid: 7e3943b514c563b4b86c97f212744524, type: 3}
   - {fileID: 21300000, guid: 9cc5b1aa5ed847248a5d3d21be7a162f, type: 3}
@@ -282,3 +284,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 84a6e66dd9a0cd7488d067548d0aa867, type: 3}
   - {fileID: 21300000, guid: 0bdfc8efe27302b4eadb445a5ab76171, type: 3}
   SpeedUpTimeValue: 8
+  SleepGain: 10
+  WorkLoseMin: 20
+  WorkLoseMax: 30

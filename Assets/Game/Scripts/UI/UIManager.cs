@@ -52,6 +52,13 @@ public class UIManager : MonoBehaviour
                 timeBarFill.color = so.WorkUIColor;
                 break;
 
+            case 4://Sleep
+                timeBarFill.color = so.SleepUIColor;
+                break;
+
+            default:
+                break;
+
         }
         TimeBar.SetActive(true);
         UpdateTimeBar(0);

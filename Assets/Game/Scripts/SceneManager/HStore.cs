@@ -26,6 +26,7 @@ public class HStore : StoreBase
     protected override void LeaveFunc()
     {
         base.LeaveFunc();
+
         GameCenter.Instance.playerManager.Player.ChangeStatus(EnumPlayerStatus.H);
         GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
         GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_AfterH);
