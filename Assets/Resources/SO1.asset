@@ -262,11 +262,11 @@ MonoBehaviour:
   PlayerAutoMoveSpeed: 5
   DrugStoreShowTime: 4.6
   DrugUIColor: {r: 0.8490566, g: 0.12129451, b: 0.108134575, a: 1}
-  DrinkStoreShowTime: 10
+  DrinkStoreShowTime: 5
   DrinkUIColor: {r: 0.8962264, g: 0.7488419, b: 0.054957304, a: 1}
   HStoreShowTime: 10
   HUIColor: {r: 0.9811321, g: 0.31933072, b: 0.70010245, a: 1}
-  WorkShowTime: 10
+  WorkShowTime: 5
   WorkUIColor: {r: 0.15143289, g: 0.39662695, b: 0.7830189, a: 1}
   SleepShowTime: 5
   SleepUIColor: {r: 0.30635712, g: 1, b: 0.054901958, a: 1}
@@ -283,7 +283,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3930791cb065e9b41969b5cecba31f23, type: 3}
   - {fileID: 21300000, guid: 84a6e66dd9a0cd7488d067548d0aa867, type: 3}
   - {fileID: 21300000, guid: 0bdfc8efe27302b4eadb445a5ab76171, type: 3}
-  SpeedUpTimeValue: 8
-  SleepGain: 10
-  WorkLoseMin: 20
+  SpeedUpTimeValue: 4
+  SleepGain: 5
+  WorkLoseMin: 25
   WorkLoseMax: 30

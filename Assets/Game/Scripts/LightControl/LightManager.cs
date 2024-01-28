@@ -57,6 +57,15 @@ public class LightManager : SerializedMonoBehaviour
             case EnumPlayerStatus.H:
                 NightVolume.profile = StatusVolumeList[2];
                 break;
+            case EnumPlayerStatus.Mask:
+                NightVolume.profile = StatusVolumeList[3];
+
+                break;
+            
+            case EnumPlayerStatus.Tired:
+
+                SetNightVolume(GameCenter.Instance.Day);
+                break;
 
             default:
                 break;

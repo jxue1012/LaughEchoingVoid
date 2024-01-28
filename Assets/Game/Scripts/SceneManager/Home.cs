@@ -98,6 +98,7 @@ public class Home : MonoBehaviour
         //NPC Die
         deadNpcNum = 0;
         int restNum = GameCenter.Instance.Day + 1;
+        restNum = Mathf.Clamp(restNum, 0, 6);
         int index = 0;
         Transform diePoint = GameCenter.Instance.sceneManager.fallPoint;
         var player = GameCenter.Instance.playerManager.Player;

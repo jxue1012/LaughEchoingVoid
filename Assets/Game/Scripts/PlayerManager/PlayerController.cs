@@ -173,6 +173,7 @@ public class PlayerController : CharBaseController
     public bool CanMask;
     private bool lastIntactFlag;
     private EnumPlayerStatus statusBeforeMask;
+    
 
     private void SwitchMask()
     {
@@ -187,6 +188,7 @@ public class PlayerController : CharBaseController
     {
         SA.AnimationState.Complete += MaskOnCallback;
         PlayBaseAnim(EnumAnim.MaskOn, false);
+        GameCenter.Instance.audioManager.PlaySFX(EnumSfxType.SFX_Mask);
     }
 
     private void MaskOnCallback(TrackEntry entry)
@@ -197,6 +199,7 @@ public class PlayerController : CharBaseController
             ChangeStatus(EnumPlayerStatus.Mask);
             CanMask = true;
             CanMove = true;
+            GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_MaskOn);
             if (lastIntactFlag)
                 CanIntact = true;
             SA.AnimationState.Complete -= MaskOnCallback;
@@ -216,6 +219,7 @@ public class PlayerController : CharBaseController
             ChangeStatus(statusBeforeMask);
             CanMask = true;
             CanMove = true;
+            GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_Night);
             if (lastIntactFlag)
                 CanIntact = true;
             SA.AnimationState.Complete -= MaskOnCallback;
