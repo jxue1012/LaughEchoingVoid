@@ -137,7 +137,8 @@ public class GameCenter : MonoBehaviour
         sceneManager.home.Hide();
         sceneManager.office.Show();
         sceneManager.CloseAllStore();
-        audioManager.PlayBGM1(EnumSfxType.BGM0_Street);
+        audioManager.StopBGM();
+        audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
     }
 
     public void StartNight()
@@ -148,6 +149,7 @@ public class GameCenter : MonoBehaviour
         var p = playerManager.Player;
         p.CanMask = true;
         p.CanAttributeChange = true;
+        audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
         audioManager.PlayBGM1(EnumSfxType.BGM1_Night);
     }
 

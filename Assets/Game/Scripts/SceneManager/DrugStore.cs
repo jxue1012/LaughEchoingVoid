@@ -23,12 +23,17 @@ public class DrugStore : StoreBase
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.DrugStoreShowTime;
         GameCenter.Instance.uIManager.ShowTimeBar(0);
+        GameCenter.Instance.audioManager.StopBGM();
+        GameCenter.Instance.audioManager.PlaySFX(EnumSfxType.SFX_Drug);
     }
 
     protected override void LeaveFunc()
     {
         base.LeaveFunc();
         GameCenter.Instance.playerManager.Player.ChangeStatus(EnumPlayerStatus.Drug);
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
+        GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_AfterDrug);
+        
     }
 
 

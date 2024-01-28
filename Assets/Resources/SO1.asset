@@ -19,6 +19,19 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 53ebbe3c6a545184d8ea6167249e0b13, type: 3}
     - {fileID: 8300000, guid: cca9a6bbb34631b459fe2643bd6fcd50, type: 3}
     - {fileID: 8300000, guid: 6a223b1c58c93134b89afe4008b8eb41, type: 3}
+    - {fileID: 8300000, guid: 45d0132f3c5b96f429e8bcb69c12a32a, type: 3}
+    - {fileID: 8300000, guid: 7c4cad4bf7d077a43918d7a1893cb2a5, type: 3}
+    - {fileID: 8300000, guid: 433bd3b65163c90408a6cf18278b5239, type: 3}
+    - {fileID: 8300000, guid: 7d6bb05edf43c9c45b4fd43687bc2dff, type: 3}
+    - {fileID: 8300000, guid: 110124c12dd42fc4e971564563bcf015, type: 3}
+    - {fileID: 8300000, guid: 9e9def1eea6823d4fbb7ea635ca30abc, type: 3}
+    - {fileID: 8300000, guid: 91a1e65fba16c9d4d96d6362a81749de, type: 3}
+    - {fileID: 8300000, guid: f916d9a474fddd040822c204c77d3385, type: 3}
+    - {fileID: 8300000, guid: f195366cc8cc8064197cbfc7c8d998b0, type: 3}
+    - {fileID: 8300000, guid: 68e8776fd0e7e06419e327d6c5e9e54e, type: 3}
+    - {fileID: 8300000, guid: 077289eaefd94054794b12b9851728f7, type: 3}
+    - {fileID: 8300000, guid: 5506891785759a846849f7e7feeabe04, type: 3}
+    - {fileID: 8300000, guid: 7a2ff5574618467408092aaeeb615f29, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -43,7 +56,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 16
     - Name: 
       Entry: 7
       Data: 
@@ -81,6 +94,162 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 10
+    - Name: $v
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 11
+    - Name: $v
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 12
+    - Name: $v
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 13
+    - Name: $v
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 14
+    - Name: $v
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 15
+    - Name: $v
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -91,13 +260,13 @@ MonoBehaviour:
   NpcMoveMinSpeed: 2.5
   NpcMoveMaxSpeed: 4
   PlayerAutoMoveSpeed: 5
-  DrugStoreShowTime: 3
+  DrugStoreShowTime: 4.6
   DrugUIColor: {r: 0.8490566, g: 0.12129451, b: 0.108134575, a: 1}
-  DrinkStoreShowTime: 3
+  DrinkStoreShowTime: 10
   DrinkUIColor: {r: 0.8962264, g: 0.7488419, b: 0.054957304, a: 1}
-  HStoreShowTime: 3
+  HStoreShowTime: 10
   HUIColor: {r: 0.9811321, g: 0.31933072, b: 0.70010245, a: 1}
-  WorkShowTime: 5
+  WorkShowTime: 10
   WorkUIColor: {r: 0.15143289, g: 0.39662695, b: 0.7830189, a: 1}
   ChatBoxList:
   - {fileID: 21300000, guid: 7e3943b514c563b4b86c97f212744524, type: 3}

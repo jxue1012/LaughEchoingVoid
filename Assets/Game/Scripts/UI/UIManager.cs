@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowStartScene()
     {
-
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM0_MainScreen);
         StartScene.SetActive(true);
         ButtonSign.SetActive(false);
     }

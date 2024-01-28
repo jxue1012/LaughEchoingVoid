@@ -74,6 +74,9 @@ public class SceneManager : MonoBehaviour
         pm.Player.transform.position = enterPoint.position;
         pm.Player.ChangeStatus(EnumPlayerStatus.Nomral);
         pm.SetNpcToEndScene();
+
+        GameCenter.Instance.audioManager.StopBGM();
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM_Cliff);
     }
 
     [Button]

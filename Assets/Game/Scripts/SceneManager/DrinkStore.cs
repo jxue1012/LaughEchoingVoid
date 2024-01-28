@@ -20,6 +20,8 @@ public class DrinkStore : StoreBase
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.DrinkStoreShowTime;
         GameCenter.Instance.uIManager.ShowTimeBar(1);
+        GameCenter.Instance.audioManager.StopBGM();
+        GameCenter.Instance.audioManager.PlaySFX(EnumSfxType.SFX_Drink);
     }
 
 
@@ -27,6 +29,8 @@ public class DrinkStore : StoreBase
     {
         base.LeaveFunc();
         GameCenter.Instance.playerManager.Player.ChangeStatus(EnumPlayerStatus.Drunk);
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
+        GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_AfterDrink);
     }
 
 }

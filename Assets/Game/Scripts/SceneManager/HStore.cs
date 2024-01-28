@@ -19,12 +19,16 @@ public class HStore : StoreBase
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.HStoreShowTime;
         GameCenter.Instance.uIManager.ShowTimeBar(2);
+        GameCenter.Instance.audioManager.StopBGM();
+        GameCenter.Instance.audioManager.PlaySFX(EnumSfxType.SFX_H);
     }
 
     protected override void LeaveFunc()
     {
         base.LeaveFunc();
         GameCenter.Instance.playerManager.Player.ChangeStatus(EnumPlayerStatus.H);
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM0_Street);
+        GameCenter.Instance.audioManager.PlayBGM1(EnumSfxType.BGM1_AfterH);
     }
 
 }

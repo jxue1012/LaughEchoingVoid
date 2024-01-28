@@ -68,6 +68,8 @@ public class Office : MonoBehaviour
         timer = 0;
         showTime = GameCenter.Instance.globalSettingSO.WorkShowTime;
         GameCenter.Instance.uIManager.ShowTimeBar(3);
+        
+        GameCenter.Instance.audioManager.StopBGM();
         GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM1_Work);
     }
 
