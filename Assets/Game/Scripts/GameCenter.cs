@@ -35,12 +35,7 @@ public class GameCenter : MonoBehaviour
 
     private void Start()
     {
-        StartNight();
-        var p = playerManager.Player;
-        p.CanMask = true;
-        p.ChangeStatus(EnumPlayerStatus.Tired);
-        playerManager.SetNpcToWalkOnStreet();
-        
+        uIManager.ShowStartScene();
     }
 
     private void BeforeInit()
@@ -73,12 +68,27 @@ public class GameCenter : MonoBehaviour
 
     public void StartGame()
     {
+        uIManager.screenTransitionUI.EndTransition();
+    }
+
+    public void StartGameDelay(float time)
+    {
+        Invoke("StartGame", time);
+        StartNight();
+        var p = playerManager.Player;
+        p.CanMask = true;
+        p.ChangeStatus(EnumPlayerStatus.Tired);
+        playerManager.SetNpcToWalkOnStreet();
 
     }
 
+    [Button]
     public void GameOver(bool success)
     {
-        uIManager.screenTransitionUI.StartTransition();
+        uIManager.screenTransitionUI.StartTransition(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        });
 
         if (success)
         {
@@ -127,6 +137,7 @@ public class GameCenter : MonoBehaviour
         sceneManager.home.Hide();
         sceneManager.office.Show();
         sceneManager.CloseAllStore();
+        audioManager.PlayBGM1(EnumSfxType.BGM0_Street);
     }
 
     public void StartNight()
@@ -137,6 +148,17 @@ public class GameCenter : MonoBehaviour
         var p = playerManager.Player;
         p.CanMask = true;
         p.CanAttributeChange = true;
+        audioManager.PlayBGM1(EnumSfxType.BGM1_Night);
+    }
+
+    public void SpeedUp()
+    {
+        Time.timeScale = globalSettingSO.SpeedUpTimeValue;
+    }
+
+    public void ResetTimeSpeed()
+    {
+        Time.timeScale = 1f;
     }
 
     #endregion

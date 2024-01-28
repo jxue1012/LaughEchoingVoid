@@ -19,7 +19,7 @@ public class DrinkStore : StoreBase
     {
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.DrinkStoreShowTime;
-
+        GameCenter.Instance.uIManager.ShowTimeBar(1);
     }
 
 

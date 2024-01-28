@@ -68,6 +68,7 @@ public class PlayerManager : SerializedMonoBehaviour
             var pos = posList[i].position;
             var npc = NpcList[i];
             npc.transform.position = pos;
+            npc.SetSortOrder();
             npc.ChangePlayerStatus(EnumPlayerStatus.Mask);
             npc.SetFaceDir(true);
             npc.PlayBaseAnim(EnumAnim.Npc_Idle, true);

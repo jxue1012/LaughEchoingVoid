@@ -13,6 +13,7 @@ public class AudioManager : SerializedMonoBehaviour
 
     public AudioSource BGM0;
     public AudioSource BGM1;
+    public AudioSource FootStep;
 
     public void Init()
     {
@@ -41,7 +42,7 @@ public class AudioManager : SerializedMonoBehaviour
         BGM0.clip = clip;
         BGM0.Play();
     }
-    
+
     [Button]
     public void PlayBGM1(EnumSfxType type)
     {
@@ -50,9 +51,22 @@ public class AudioManager : SerializedMonoBehaviour
         BGM1.Play();
     }
 
+    public void StopBGM()
+    {
+        BGM0.Stop();
+        BGM1.Stop();
+    }
+
     public void ReturnSFXToPool(SfxControl c)
     {
         sfxPool.ReturnToPool(c);
+    }
+
+    public void PlayFootStep()
+    {
+        FootStep.pitch = Random.Range(0.8f, 1.2f);
+        FootStep.volume = Random.Range(0.9f, 1.1f);
+        FootStep.Play();
     }
 
 }

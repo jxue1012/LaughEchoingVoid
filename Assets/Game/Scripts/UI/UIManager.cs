@@ -31,8 +31,28 @@ public class UIManager : MonoBehaviour
         sanFill.fillAmount = p.SanFillAmount;
     }
 
-    public void ShowTimeBar()
+    public void ShowTimeBar(int index)
     {
+        var so = GameCenter.Instance.globalSettingSO;
+        switch (index)
+        {
+            case 0://drug
+                timeBarFill.color = so.DrugUIColor;
+                break;
+
+            case 1://drink
+                timeBarFill.color = so.DrinkUIColor;
+                break;
+
+            case 2: //H
+                timeBarFill.color = so.HUIColor;
+                break;
+
+            case 3: //Work
+                timeBarFill.color = so.WorkUIColor;
+                break;
+
+        }
         TimeBar.SetActive(true);
         UpdateTimeBar(0);
     }
@@ -46,5 +66,39 @@ public class UIManager : MonoBehaviour
     {
         timeBarFill.fillAmount = value;
     }
+
+    #region ---------- Start Scene ------------
+
+    public Transform HidePoint;
+    public Transform EnterPoint;
+
+    public GameObject StartScene;
+    public GameObject ButtonSign;
+
+    public void ShowStartScene()
+    {
+
+        StartScene.SetActive(true);
+        ButtonSign.SetActive(false);
+    }
+
+    public void HideStartScene()
+    {
+        StartScene.SetActive(false);
+
+    }
+
+    public void OnStartBtnClick()
+    {
+
+        GameCenter.Instance.uIManager.screenTransitionUI.StartTransition(() =>
+        {
+            HideStartScene();
+            GameCenter.Instance.StartGameDelay(0.5f);
+        });
+
+    }
+
+    #endregion
 
 }

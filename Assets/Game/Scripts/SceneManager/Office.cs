@@ -51,7 +51,9 @@ public class Office : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        GameCenter.Instance.ResetTimeSpeed();
         var player = GameCenter.Instance.playerManager.Player;
+        player.StopAutoMove();
         player.CanMove = false;
         player.CanMask = false;
         player.CanAttributeChange = false;
@@ -65,7 +67,8 @@ public class Office : MonoBehaviour
         timePassOn = true;
         timer = 0;
         showTime = GameCenter.Instance.globalSettingSO.WorkShowTime;
-        GameCenter.Instance.uIManager.ShowTimeBar();
+        GameCenter.Instance.uIManager.ShowTimeBar(3);
+        GameCenter.Instance.audioManager.PlayBGM0(EnumSfxType.BGM1_Work);
     }
 
 }

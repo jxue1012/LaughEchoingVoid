@@ -22,7 +22,7 @@ public class DrugStore : StoreBase
     {
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.DrugStoreShowTime;
-
+        GameCenter.Instance.uIManager.ShowTimeBar(0);
     }
 
     protected override void LeaveFunc()

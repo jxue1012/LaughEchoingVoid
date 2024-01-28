@@ -119,7 +119,6 @@ public class StoreBase : MonoBehaviour
         TimePassOn = true;
         timer = 0;
         showTime = 10f;
-        GameCenter.Instance.uIManager.ShowTimeBar();
     }
 
     public void LeaveStore()

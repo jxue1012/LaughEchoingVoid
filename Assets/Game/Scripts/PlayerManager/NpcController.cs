@@ -12,8 +12,8 @@ public class NpcController : CharBaseController
     {
         base.Init();
         SkinControl.Init();
-        StartMove(true, true);
         sortGroup = this.GetComponent<SortingGroup>();
+        Hide();
     }
 
     public override void Hide()
@@ -26,6 +26,11 @@ public class NpcController : CharBaseController
     {
         base.UpdateFunc();
         UpdateMove();
+    }
+
+    public void SetSortOrder()
+    {
+        sortGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
     }
 
     public NpcSpineSkinControl SkinControl;
@@ -45,7 +50,7 @@ public class NpcController : CharBaseController
         if (initMove)
         {
             transform.position = GameCenter.Instance.sceneManager.GetRandomPositionForNpc();
-            sortGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+            SetSortOrder();
             float rand = Random.Range(0, 100f);
             toLeft = rand > 50f ? true : false;
         }
@@ -134,6 +139,10 @@ public class NpcController : CharBaseController
             case EnumPlayerStatus.Tired:
                 MoveAnim = pm.GetAnimStr(EnumAnim.NPC_TireMove);
                 break;
+
+            case EnumPlayerStatus.Crazy:
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_CrazyMove);
+                break;
         }
     }
 
@@ -181,7 +190,7 @@ public class NpcController : CharBaseController
     public void StartChat()
     {
         chatStart = true;
-        
+
         StartCoroutine(ChatCo());
     }
 

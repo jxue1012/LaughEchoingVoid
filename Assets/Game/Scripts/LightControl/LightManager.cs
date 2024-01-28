@@ -30,13 +30,15 @@ public class LightManager : SerializedMonoBehaviour
 
     public void SetDayVolume(int day)
     {
-        var v = DayVolumeList[day];
+        int index = Mathf.Clamp(day, 0, 4);
+        var v = DayVolumeList[index];
         DayVolume.profile = v;
     }
 
     public void SetNightVolume(int day)
     {
-        var v = NightVolumeList[day];
+        int index = Mathf.Clamp(day, 0, 4);
+        var v = NightVolumeList[index];
         NightVolume.profile = v;
     }
 

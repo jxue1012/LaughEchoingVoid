@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Spine;
-using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -21,14 +20,16 @@ public class PlayerController : CharBaseController
         CanMove = true;
         ChangeStatus(EnumPlayerStatus.Nomral);
         InitAttributes();
+        InitFootstep();
 
     }
 
     protected override void UpdateFunc()
     {
         base.UpdateFunc();
-        sortGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+        SetSortOrder();
         UpdateMove();
+
         if (Input.GetKeyDown(KeyCode.Space) && CanIntact)
         {
             targetStore.Intact();
@@ -49,6 +50,10 @@ public class PlayerController : CharBaseController
         UpdateAttributes();
     }
 
+    public void SetSortOrder()
+    {
+        sortGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+    }
 
     #region ----------- Status --------------
 
@@ -57,6 +62,7 @@ public class PlayerController : CharBaseController
     [Button]
     public void ChangeStatus(EnumPlayerStatus newStatus)
     {
+
         status = newStatus;
         statusInfo = GameCenter.Instance.playerManager.GetPlayerStatusInfo(newStatus);
         moveSpeed = statusInfo.moveSpeed;
@@ -71,11 +77,15 @@ public class PlayerController : CharBaseController
     [Space(20)]
     [Header("------- Move -------")]
     [HideInInspector] public bool CanMove;
+    private Vector2 autoMoveDir = new Vector2(-1, 0f);
     private float moveSpeed = 5f;
+    private bool autoMoveOn;
 
 
     private void UpdateMove()
     {
+        if (autoMoveOn) return;
+
         if (!CanMove)
         {
             rb.velocity = Vector3.zero;
@@ -108,6 +118,21 @@ public class PlayerController : CharBaseController
     public void PlayMoveAnim()
     {
         PlayBaseAnim(statusInfo.moveAnimType, true);
+    }
+
+    public void StartAutoMoveToOffice()
+    {
+        autoMoveDir = new Vector2(-1, 0f);
+        autoMoveOn = true;
+        CanMove = false;
+        rb.velocity = autoMoveDir * GameCenter.Instance.globalSettingSO.PlayerAutoMoveSpeed;
+        PlayBaseAnim(statusInfo.moveAnimType, true);
+    }
+
+    public void StopAutoMove()
+    {
+        autoMoveOn = false;
+        rb.velocity = Vector3.zero;
     }
 
 
@@ -293,7 +318,10 @@ public class PlayerController : CharBaseController
         San = Mathf.Clamp(temp, 0, MaxSan);
         GameCenter.Instance.uIManager.UpdateBarFill();
         if (San == 0)
+        {
+            ChangeStatus(EnumPlayerStatus.Crazy);
             CanAttributeChange = false;
+        }
     }
 
     public void ChangeMaxSan(int change)
@@ -303,7 +331,10 @@ public class PlayerController : CharBaseController
         San = Mathf.Min(San, MaxSan);
         GameCenter.Instance.uIManager.UpdateBarFill();
         if (San == 0)
+        {
+            ChangeStatus(EnumPlayerStatus.Crazy);
             CanAttributeChange = false;
+        }
     }
 
     public void FullSan()
@@ -350,6 +381,25 @@ public class PlayerController : CharBaseController
             Hide();
             GameCenter.Instance.GameOver(true);
             SA.AnimationState.Complete -= OnHangDieComplete;
+        }
+    }
+
+    #endregion
+
+    #region --------- Footstep -------------
+
+    private void InitFootstep()
+    {
+        SA.AnimationState.Event += HandleSpineEvent;
+    }
+
+    void HandleSpineEvent(TrackEntry trackEntry, Spine.Event e)
+    {
+        // 检查事件名称
+        if (e.Data.Name == "foot")
+        {
+            GameCenter.Instance.audioManager.PlayFootStep();
+
         }
     }
 

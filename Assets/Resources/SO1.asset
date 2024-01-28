@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f039e86d99f5b34186d5103727cbefc, type: 3}
+  m_Name: SO1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 53ebbe3c6a545184d8ea6167249e0b13, type: 3}
+    - {fileID: 8300000, guid: cca9a6bbb34631b459fe2643bd6fcd50, type: 3}
+    - {fileID: 8300000, guid: 6a223b1c58c93134b89afe4008b8eb41, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: DicAudio
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[EnumSfxType, Assembly-CSharp],[UnityEngine.AudioClip,
+        UnityEngine.AudioModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[EnumSfxType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  defaultAttributeLoseTime: 1
+  AttributeLoseValue: 1
+  NpcMoveMinSpeed: 2.5
+  NpcMoveMaxSpeed: 4
+  PlayerAutoMoveSpeed: 5
+  DrugStoreShowTime: 3
+  DrugUIColor: {r: 0.8490566, g: 0.12129451, b: 0.108134575, a: 1}
+  DrinkStoreShowTime: 3
+  DrinkUIColor: {r: 0.8962264, g: 0.7488419, b: 0.054957304, a: 1}
+  HStoreShowTime: 3
+  HUIColor: {r: 0.9811321, g: 0.31933072, b: 0.70010245, a: 1}
+  WorkShowTime: 5
+  WorkUIColor: {r: 0.15143289, g: 0.39662695, b: 0.7830189, a: 1}
+  ChatBoxList:
+  - {fileID: 21300000, guid: 7e3943b514c563b4b86c97f212744524, type: 3}
+  - {fileID: 21300000, guid: 9cc5b1aa5ed847248a5d3d21be7a162f, type: 3}
+  - {fileID: 21300000, guid: 9f179359ce200294599af23a494f054e, type: 3}
+  - {fileID: 21300000, guid: ce66ca2f0836730439a8eb12c3ea9f7c, type: 3}
+  - {fileID: 21300000, guid: e8ee77034cdbd244ca8f5898f0198fbf, type: 3}
+  - {fileID: 21300000, guid: 3c0ed04c662f47c47ad5fc89d49c7530, type: 3}
+  - {fileID: 21300000, guid: cb41ecf598b1e264483522bc6d02917d, type: 3}
+  - {fileID: 21300000, guid: 4482caefae829e24f985bd3607fe2755, type: 3}
+  - {fileID: 21300000, guid: 49639819577bb284998291cea82b3edf, type: 3}
+  - {fileID: 21300000, guid: 3930791cb065e9b41969b5cecba31f23, type: 3}
+  - {fileID: 21300000, guid: 84a6e66dd9a0cd7488d067548d0aa867, type: 3}
+  - {fileID: 21300000, guid: 0bdfc8efe27302b4eadb445a5ab76171, type: 3}
+  SpeedUpTimeValue: 8

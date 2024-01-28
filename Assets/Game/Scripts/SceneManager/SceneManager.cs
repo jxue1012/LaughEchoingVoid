@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
-using Sirenix.OdinInspector.Editor;
 
 public class SceneManager : MonoBehaviour
 {
@@ -85,6 +83,8 @@ public class SceneManager : MonoBehaviour
         StartDayScene();
         home.Hide();
 
+
+
         GameCenter.Instance.uIManager.screenTransitionUI.EndTransition();
         GameCenter.Instance.playerManager.SetNpcToWalkOnStreet();
         var player = GameCenter.Instance.playerManager.Player;
@@ -94,9 +94,10 @@ public class SceneManager : MonoBehaviour
         player.SetFaceDir(true);
         player.transform.DOMove(home.EnterPoint.position, 1f).OnComplete(() =>
         {
-            player.CanMove = true;
+            //player.CanMove = true;
             GameCenter.Instance.StartDay();
-            player.PlayIdleAnim();
+            player.StartAutoMoveToOffice();
+            GameCenter.Instance.SpeedUp();
         });
 
     }

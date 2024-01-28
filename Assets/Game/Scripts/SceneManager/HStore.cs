@@ -18,7 +18,7 @@ public class HStore : StoreBase
     {
         base.StartStoreAction();
         showTime = GameCenter.Instance.globalSettingSO.HStoreShowTime;
-
+        GameCenter.Instance.uIManager.ShowTimeBar(2);
     }
 
     protected override void LeaveFunc()
