@@ -6,14 +6,14 @@ filter: Linear,Linear
 repeat: none
 1
   rotate: false
-  xy: 1, 1
+  xy: 153, 1
   size: 44, 23
   orig: 44, 23
   offset: 0, 0
   index: -1
 2
   rotate: false
-  xy: 1, 1
+  xy: 153, 1
   size: 44, 23
   orig: 44, 23
   offset: 0, 0
@@ -48,35 +48,42 @@ repeat: none
   index: -1
 6
   rotate: true
-  xy: 1254, 132
+  xy: 1277, 347
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 61
   rotate: true
-  xy: 1277, 347
+  xy: 1362, 184
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 62
   rotate: true
-  xy: 1411, 184
+  xy: 1434, 347
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 63
   rotate: true
-  xy: 1434, 347
+  xy: 1362, 21
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 64
   rotate: true
-  xy: 1417, 21
+  xy: 1519, 184
+  size: 162, 156
+  orig: 162, 156
+  offset: 0, 0
+  index: -1
+65
+  rotate: true
+  xy: 1591, 347
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
@@ -96,8 +103,8 @@ repeat: none
   offset: 0, 0
   index: -1
 7
-  rotate: true
-  xy: 1254, 25
+  rotate: false
+  xy: 1676, 21
   size: 106, 162
   orig: 106, 162
   offset: 0, 0
@@ -125,22 +132,36 @@ repeat: none
   index: -1
 a1
   rotate: true
-  xy: 1591, 347
+  xy: 1519, 21
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 a2
   rotate: true
-  xy: 1574, 21
+  xy: 1676, 184
   size: 162, 156
   orig: 162, 156
   offset: 0, 0
   index: -1
 a3
   rotate: true
-  xy: 1568, 184
+  xy: 1748, 347
   size: 162, 156
   orig: 162, 156
+  offset: 0, 0
+  index: -1
+shader
+  rotate: true
+  xy: 1254, 49
+  size: 245, 107
+  orig: 245, 107
+  offset: 0, 0
+  index: -1
+zzz
+  rotate: true
+  xy: 1, 14
+  size: 10, 151
+  orig: 10, 151
   offset: 0, 0
   index: -1

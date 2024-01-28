@@ -6,6 +6,7 @@ public class DrugStore : StoreBase
 {
 
 
+
     protected override void EnterTrigger(Collider2D other)
     {
         base.EnterTrigger(other);
@@ -14,6 +15,13 @@ public class DrugStore : StoreBase
     protected override void ExitTrigger(Collider2D other)
     {
         base.ExitTrigger(other);
+
+    }
+
+    protected override void StartStoreAction()
+    {
+        base.StartStoreAction();
+        showTime = GameCenter.Instance.globalSettingSO.DrugStoreShowTime;
 
     }
 

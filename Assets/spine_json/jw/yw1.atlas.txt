@@ -1,0 +1,27 @@
+
+yw1.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+yw1
+  rotate: false
+  xy: 293, 1
+  size: 126, 90
+  orig: 126, 90
+  offset: 0, 0
+  index: -1
+yw2
+  rotate: true
+  xy: 293, 92
+  size: 139, 151
+  orig: 139, 151
+  offset: 0, 0
+  index: -1
+yw3
+  rotate: true
+  xy: 1, 57
+  size: 174, 291
+  orig: 174, 291
+  offset: 0, 0
+  index: -1

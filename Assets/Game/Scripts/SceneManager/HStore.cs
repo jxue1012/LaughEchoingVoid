@@ -14,6 +14,13 @@ public class HStore : StoreBase
         base.ExitTrigger(other);
     }
 
+    protected override void StartStoreAction()
+    {
+        base.StartStoreAction();
+        showTime = GameCenter.Instance.globalSettingSO.HStoreShowTime;
+
+    }
+
     protected override void LeaveFunc()
     {
         base.LeaveFunc();

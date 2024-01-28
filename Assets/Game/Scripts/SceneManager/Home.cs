@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Networking.Types;
 
 public class Home : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Home : MonoBehaviour
 
     public Transform EnterPoint;
     public Transform LeavePoint;
+    public float distanceSpeed = 0.25f;
 
     public void Init()
     {
@@ -31,14 +33,113 @@ public class Home : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        GameCenter.Instance.sceneManager.CloseAllStore();
         var player = GameCenter.Instance.playerManager.Player;
         player.CanMove = false;
         player.CanMask = false;
         player.CanAttributeChange = false;
         player.PlayMoveAnim();
-        player.transform.DOMove(LeavePoint.position, 1f);
+        player.transform.DOMove(LeavePoint.position, 1f).OnComplete(() =>
+        {
+            GameCenter.Instance.sceneManager.StartEndScene();
+        });
         GameCenter.Instance.uIManager.screenTransitionUI.StartTransition();
     }
+
+    public void StartHomeShow()
+    {
+        int day = GameCenter.Instance.Day;
+        Vector3 playerPos = GameCenter.Instance.sceneManager.PlayerPos[day].position;
+        var player = GameCenter.Instance.playerManager.Player;
+        player.PlayBaseAnim(EnumAnim.NormalMove, true);
+        player.SetFaceDir(true);
+        float moveTime = Vector3.Distance(playerPos, player.transform.position) * distanceSpeed;
+        player.transform.DOMove(playerPos, moveTime).OnComplete(() =>
+        {
+            player.PlayBaseAnim(EnumAnim.NormalIdle, true);
+            StartDie();
+        });
+    }
+
+    private void StartDie()
+    {
+        int day = GameCenter.Instance.Day;
+        var player = GameCenter.Instance.playerManager.Player;
+        if (player.San == 0)
+        {
+            //Player Die San
+            Transform diePoint = GameCenter.Instance.sceneManager.fallPoint;
+            float moveTime = Vector3.Distance(player.transform.position, diePoint.position) * distanceSpeed;
+            player.PlayBaseAnim(EnumAnim.NormalMove, true);
+            player.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
+            {
+                player.PlayerDie(true);
+            });
+        }
+        else if (player.HP == 0)
+        {
+            //Player Die HP
+            Transform diePoint = GameCenter.Instance.sceneManager.fallPoint;
+            float moveTime = Vector3.Distance(player.transform.position, diePoint.position) * distanceSpeed;
+            player.PlayBaseAnim(EnumAnim.NormalMove, true);
+            player.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
+            {
+                player.PlayerDie(false);
+            });
+        }
+        else
+        {
+            StartCoroutine(NpcDie());
+        }
+    }
+
+    IEnumerator NpcDie()
+    {
+        //NPC Die
+        deadNpcNum = 0;
+        int restNum = GameCenter.Instance.Day + 1;
+        int index = 0;
+        Transform diePoint = GameCenter.Instance.sceneManager.fallPoint;
+        var player = GameCenter.Instance.playerManager.Player;
+        bool isFall = player.San > player.HP ? false : true;
+        while (restNum > 0)
+        {
+            restNum -= 1;
+            index += 1;
+            var npc = GameCenter.Instance.playerManager.NpcList[index];
+            float moveTime = Vector3.Distance(npc.transform.position, diePoint.position) * distanceSpeed;
+            npc.PlayBaseAnim(EnumAnim.NPC_MaskMove, true);
+            npc.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
+            {
+                npc.NpcDie(isFall, NpcDead);
+            });
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private int deadNpcNum;
+
+    public void NpcDead()
+    {
+        deadNpcNum += 1;
+        if (deadNpcNum >= GameCenter.Instance.Day + 1)
+        {
+            EndHomeShow();
+        }
+    }
+
+    public void EndHomeShow()
+    {
+        Debug.Log("home show End");
+        GameCenter.Instance.uIManager.screenTransitionUI.StartTransition(() =>
+        {
+            GameCenter.Instance.sceneManager.LeaveHome();
+        });
+
+    }
+
+
+
 
 
 }

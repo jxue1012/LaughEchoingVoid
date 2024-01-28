@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline;
+using Spine;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class NpcController : CharBaseController
 {
@@ -13,6 +14,12 @@ public class NpcController : CharBaseController
         SkinControl.Init();
         StartMove(true, true);
         sortGroup = this.GetComponent<SortingGroup>();
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        canMove = false;
     }
 
     protected override void UpdateFunc()
@@ -26,13 +33,15 @@ public class NpcController : CharBaseController
     private Transform moveTarget;
     private bool canMove;
     private EnumPlayerStatus status;
-    private string moveAnim;
+    public string MoveAnim { get; private set; }
     private Vector3 moveDir;
     private float moveSpeed;
     private bool moveLeft;
 
     public void StartMove(bool toLeft, bool initMove)
     {
+        Show();
+
         if (initMove)
         {
             transform.position = GameCenter.Instance.sceneManager.GetRandomPositionForNpc();
@@ -41,7 +50,6 @@ public class NpcController : CharBaseController
             toLeft = rand > 50f ? true : false;
         }
 
-        status = EnumPlayerStatus.Nomral;
         SetMoveAnim();
         canMove = true;
         var so = GameCenter.Instance.globalSettingSO;
@@ -73,7 +81,7 @@ public class NpcController : CharBaseController
         if (!canMove) return;
 
         this.transform.position += moveDir * moveSpeed * Time.deltaTime;
-        PlayBaseAnim(moveAnim, true);
+        PlayBaseAnim(MoveAnim, true);
         if (moveLeft)
         {
             if (this.transform.position.x < moveTarget.position.x)
@@ -104,30 +112,104 @@ public class NpcController : CharBaseController
         switch (status)
         {
             case EnumPlayerStatus.Nomral:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_NormalMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_NormalMove);
                 break;
 
             case EnumPlayerStatus.Mask:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_MaskMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_MaskMove);
                 break;
 
             case EnumPlayerStatus.Drug:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_DrugMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_DrugMove);
                 break;
 
             case EnumPlayerStatus.Drunk:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_DrunkMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_DrunkMove);
                 break;
 
             case EnumPlayerStatus.H:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_HMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_HMove);
                 break;
 
             case EnumPlayerStatus.Tired:
-                moveAnim = pm.GetAnimStr(EnumAnim.NPC_TireMove);
+                MoveAnim = pm.GetAnimStr(EnumAnim.NPC_TireMove);
                 break;
         }
     }
+
+    Action dieCallback;
+
+    public void NpcDie(bool isFall, Action callBack)
+    {
+        dieCallback = callBack;
+        if (isFall)
+        {
+            SA.AnimationState.Complete += OnFallDieComplete;
+            PlayBaseAnim(EnumAnim.NPC_FallDie, false);
+        }
+        else
+        {
+            SA.AnimationState.Complete += OnHangDieComplete;
+            PlayBaseAnim(EnumAnim.NPC_HangDie, false);
+        }
+    }
+
+    private void OnFallDieComplete(TrackEntry entry)
+    {
+        if (entry.Animation.Name == GameCenter.Instance.playerManager.GetAnimStr(EnumAnim.NPC_FallDie))
+        {
+            Hide();
+            dieCallback?.Invoke();
+            SA.AnimationState.Complete -= OnFallDieComplete;
+        }
+    }
+
+    private void OnHangDieComplete(TrackEntry entry)
+    {
+        if (entry.Animation.Name == GameCenter.Instance.playerManager.GetAnimStr(EnumAnim.NPC_HangDie))
+        {
+            Hide();
+            dieCallback?.Invoke();
+            SA.AnimationState.Complete -= OnHangDieComplete;
+        }
+    }
+
+    #region ----------- Chat bOX -----------
+    [Space(15)]
+    public Image ChatBoxImg;
+    private bool chatStart;
+    public void StartChat()
+    {
+        chatStart = true;
+        
+        StartCoroutine(ChatCo());
+    }
+
+    IEnumerator ChatCo()
+    {
+        while (chatStart)
+        {
+            var list = GameCenter.Instance.globalSettingSO.ChatBoxList;
+            int rand = Random.Range(0, list.Count);
+            var sprite = list[rand];
+            ChatBoxImg.sprite = sprite;
+            float time = Random.Range(0.5f, 1.5f);
+            ChatBoxImg.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.75f);
+            ChatBoxImg.gameObject.SetActive(false);
+            yield return new WaitForSeconds(time);
+
+        }
+    }
+
+    public void EndChat()
+    {
+        chatStart = false;
+        ChatBoxImg.gameObject.SetActive(false);
+        StopAllCoroutines();
+    }
+
+    #endregion
 
 
 

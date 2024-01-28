@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using Sirenix.Reflection.Editor;
 
 public class ScreenTransitionUI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ScreenTransitionUI : MonoBehaviour
     private Sequence StartSequence;
     private Sequence EndSequence;
 
+    Action eStartFunc;
     Action eEndFunc;
 
 
@@ -37,6 +39,11 @@ public class ScreenTransitionUI : MonoBehaviour
         {
             mat.SetFloat("_Radius", value);
         }))
+        .AppendCallback(() =>
+        {
+            eStartFunc?.Invoke();
+            eStartFunc = null;
+        })
         .SetAutoKill(false)
         .SetUpdate(true);
 
@@ -62,7 +69,7 @@ public class ScreenTransitionUI : MonoBehaviour
         {
             eEndFunc?.Invoke();
             this.gameObject.SetActive(false);
-            ClearEvents();
+            eEndFunc = null;
         })
         .SetAutoKill(false)
         .SetUpdate(true);
@@ -70,8 +77,9 @@ public class ScreenTransitionUI : MonoBehaviour
         EndSequence = s1;
     }
 
-    public void StartTransition()
+    public void StartTransition(Action startFunc = null)
     {
+        eStartFunc += startFunc;
         StartSequence.Restart();
     }
 
@@ -83,6 +91,7 @@ public class ScreenTransitionUI : MonoBehaviour
 
     private void ClearEvents()
     {
+
         eEndFunc = null;
     }
 

@@ -41,7 +41,9 @@ public enum EnumAnim
     MaskMove, MaskIdle, HMove, HIdle,
     NPC_HangDie, NPC_FallDie, NPC_Jump, Npc_Idle, 
     NPC_NormalMove, NPC_TireMove, NPC_CrazyMove, NPC_DrugMove, NPC_DrunkMove,
-    NPC_MaskMove, NPC_HMove
+    NPC_MaskMove, NPC_HMove,
+    PlayerHangDie, PlayerFallDie
+
 }
 
 public enum EnumSfxType

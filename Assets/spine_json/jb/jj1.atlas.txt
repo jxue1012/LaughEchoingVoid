@@ -1,0 +1,27 @@
+
+jj1.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+jj1
+  rotate: true
+  xy: 281, 45
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+jj2
+  rotate: true
+  xy: 281, 86
+  size: 127, 96
+  orig: 127, 96
+  offset: 0, 0
+  index: -1
+jj3
+  rotate: false
+  xy: 1, 1
+  size: 279, 212
+  orig: 359, 341
+  offset: 80, 0
+  index: -1

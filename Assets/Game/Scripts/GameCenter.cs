@@ -9,6 +9,7 @@ public class GameCenter : MonoBehaviour
     public static GameCenter Instance;
 
     //Managers
+    public LightManager lightManager;
     public SceneManager sceneManager;
     public PlayerManager playerManager;
     public CamManager camManager;
@@ -22,11 +23,12 @@ public class GameCenter : MonoBehaviour
 
     //Variables
     public GlobalSettingSO globalSettingSO;
+    public int Day;
 
     private void Awake()
     {
         Instance = this;
-
+        Day = 0;
         BeforeInit();
         Init();
     }
@@ -34,9 +36,11 @@ public class GameCenter : MonoBehaviour
     private void Start()
     {
         StartNight();
-        var p = GameCenter.Instance.playerManager.Player;
+        var p = playerManager.Player;
         p.CanMask = true;
         p.ChangeStatus(EnumPlayerStatus.Tired);
+        playerManager.SetNpcToWalkOnStreet();
+        
     }
 
     private void BeforeInit()
@@ -48,6 +52,7 @@ public class GameCenter : MonoBehaviour
     {
         playerManager.Init();
         camManager.Init();
+        lightManager.Init();
         sceneManager.Init();
 
         audioManager.Init();
@@ -73,6 +78,8 @@ public class GameCenter : MonoBehaviour
 
     public void GameOver(bool success)
     {
+        uIManager.screenTransitionUI.StartTransition();
+
         if (success)
         {
 

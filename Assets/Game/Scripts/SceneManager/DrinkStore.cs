@@ -15,6 +15,13 @@ public class DrinkStore : StoreBase
 
     }
 
+    protected override void StartStoreAction()
+    {
+        base.StartStoreAction();
+        showTime = GameCenter.Instance.globalSettingSO.DrinkStoreShowTime;
+
+    }
+
 
     protected override void LeaveFunc()
     {

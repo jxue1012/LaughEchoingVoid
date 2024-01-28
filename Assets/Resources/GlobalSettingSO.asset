@@ -90,3 +90,20 @@ MonoBehaviour:
   AttributeLoseValue: 1
   NpcMoveMinSpeed: 2.5
   NpcMoveMaxSpeed: 4
+  DrugStoreShowTime: 3
+  DrinkStoreShowTime: 3
+  HStoreShowTime: 3
+  WorkShowTime: 5
+  ChatBoxList:
+  - {fileID: 21300000, guid: 7e3943b514c563b4b86c97f212744524, type: 3}
+  - {fileID: 21300000, guid: 9cc5b1aa5ed847248a5d3d21be7a162f, type: 3}
+  - {fileID: 21300000, guid: 9f179359ce200294599af23a494f054e, type: 3}
+  - {fileID: 21300000, guid: ce66ca2f0836730439a8eb12c3ea9f7c, type: 3}
+  - {fileID: 21300000, guid: e8ee77034cdbd244ca8f5898f0198fbf, type: 3}
+  - {fileID: 21300000, guid: 3c0ed04c662f47c47ad5fc89d49c7530, type: 3}
+  - {fileID: 21300000, guid: cb41ecf598b1e264483522bc6d02917d, type: 3}
+  - {fileID: 21300000, guid: 4482caefae829e24f985bd3607fe2755, type: 3}
+  - {fileID: 21300000, guid: 49639819577bb284998291cea82b3edf, type: 3}
+  - {fileID: 21300000, guid: 3930791cb065e9b41969b5cecba31f23, type: 3}
+  - {fileID: 21300000, guid: 84a6e66dd9a0cd7488d067548d0aa867, type: 3}
+  - {fileID: 21300000, guid: 0bdfc8efe27302b4eadb445a5ab76171, type: 3}

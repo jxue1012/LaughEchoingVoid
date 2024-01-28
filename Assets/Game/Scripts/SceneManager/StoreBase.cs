@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 
 public class StoreBase : MonoBehaviour
 {
@@ -11,12 +12,34 @@ public class StoreBase : MonoBehaviour
     public Transform EnterPoint, LeavePoint;
     private Collider2D col;
     private bool canEnter;
+    protected bool TimePassOn;
+    protected float showTime;
+    protected float timer;
 
     public void Init()
     {
         Sign.SetActive(false);
         col = this.GetComponent<Collider2D>();
         canEnter = true;
+    }
+
+    private void Update()
+    {
+        if (TimePassOn)
+            UpdateFunc();
+    }
+
+    protected virtual void UpdateFunc()
+    {
+        timer += Time.deltaTime;
+        GameCenter.Instance.uIManager.UpdateTimeBar(timer / showTime);
+        if (timer >= showTime)
+        {
+            timer = 0f;
+            TimePassOn = false;
+            GameCenter.Instance.uIManager.HideTimeBar();
+            GameCenter.Instance.playerManager.Player.LeaveStore();
+        }
     }
 
     public void Show()
@@ -66,7 +89,7 @@ public class StoreBase : MonoBehaviour
 
     public void Intact()
     {
-        canEnter = false;
+        //canEnter = false;
 
         var player = GameCenter.Instance.playerManager.Player;
         player.CanMove = false;
@@ -88,7 +111,15 @@ public class StoreBase : MonoBehaviour
 
     protected virtual void EnterStore()
     {
-        GameCenter.Instance.uIManager.screenTransitionUI.StartTransition();
+        GameCenter.Instance.uIManager.screenTransitionUI.StartTransition(StartStoreAction);
+    }
+
+    protected virtual void StartStoreAction()
+    {
+        TimePassOn = true;
+        timer = 0;
+        showTime = 10f;
+        GameCenter.Instance.uIManager.ShowTimeBar();
     }
 
     public void LeaveStore()

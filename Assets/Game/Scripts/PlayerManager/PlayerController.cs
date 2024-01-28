@@ -60,6 +60,8 @@ public class PlayerController : CharBaseController
         status = newStatus;
         statusInfo = GameCenter.Instance.playerManager.GetPlayerStatusInfo(newStatus);
         moveSpeed = statusInfo.moveSpeed;
+        GameCenter.Instance.playerManager.ChangeNpcStatus(newStatus);
+        GameCenter.Instance.lightManager.SetStatusVolume(status);
     }
 
     #endregion
@@ -199,7 +201,7 @@ public class PlayerController : CharBaseController
 
     #region ----------- Attributes -------------
 
-    public int HP { get; private set; }
+    public int HP;
     public int MaxHP { get; private set; }
     private int DefaultMaxHP = 100;
     public float HPFillAmount => HP * 1f / DefaultMaxHP;
@@ -207,7 +209,7 @@ public class PlayerController : CharBaseController
     private float hpTimer;
     private float hpTime;
 
-    public int San { get; private set; }
+    public int San;
     public int MaxSan { get; private set; }
     private int DefaultMaxSan = 100;
     public float SanFillAmount => San * 1f / DefaultMaxSan;
@@ -312,6 +314,44 @@ public class PlayerController : CharBaseController
 
 
 
+
+    #endregion
+
+    #region  ------------ Die -----------------
+
+    public void PlayerDie(bool isFall)
+    {
+        if (isFall)
+        {
+            SA.AnimationState.Complete += OnFallDieComplete;
+            PlayBaseAnim(EnumAnim.PlayerFallDie, false);
+        }
+        else
+        {
+            SA.AnimationState.Complete += OnHangDieComplete;
+            PlayBaseAnim(EnumAnim.PlayerHangDie, false);
+        }
+    }
+
+    private void OnFallDieComplete(TrackEntry entry)
+    {
+        if (entry.Animation.Name == GameCenter.Instance.playerManager.GetAnimStr(EnumAnim.PlayerFallDie))
+        {
+            Hide();
+            GameCenter.Instance.GameOver(true);
+            SA.AnimationState.Complete -= OnFallDieComplete;
+        }
+    }
+
+    private void OnHangDieComplete(TrackEntry entry)
+    {
+        if (entry.Animation.Name == GameCenter.Instance.playerManager.GetAnimStr(EnumAnim.PlayerHangDie))
+        {
+            Hide();
+            GameCenter.Instance.GameOver(true);
+            SA.AnimationState.Complete -= OnHangDieComplete;
+        }
+    }
 
     #endregion
 
