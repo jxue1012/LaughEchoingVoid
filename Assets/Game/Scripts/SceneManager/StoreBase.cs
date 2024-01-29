@@ -147,7 +147,7 @@ public class StoreBase : MonoBehaviour
 
         GameCenter.Instance.sceneManager.CloseAllStore();
         var p = GameCenter.Instance.playerManager.Player;
-        p.ChangeMaxSan(-20);
+        p.ChangeMaxSan(-30);
         p.FullHP();
         p.FullSan();
 

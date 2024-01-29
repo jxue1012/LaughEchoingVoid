@@ -49,7 +49,7 @@ public class Home : MonoBehaviour
     public void StartHomeShow()
     {
         int day = GameCenter.Instance.Day;
-        Vector3 playerPos = GameCenter.Instance.sceneManager.PlayerPos[day].position;
+        Vector3 playerPos = GameCenter.Instance.sceneManager.GetPlayerPos(day);
         var player = GameCenter.Instance.playerManager.Player;
         player.PlayBaseAnim(EnumAnim.NormalMove, true);
         player.SetFaceDir(true);
@@ -82,10 +82,9 @@ public class Home : MonoBehaviour
             Transform diePoint = GameCenter.Instance.sceneManager.fallPoint;
             float moveTime = Vector3.Distance(player.transform.position, diePoint.position) * distanceSpeed;
             player.PlayBaseAnim(EnumAnim.NormalMove, true);
-            player.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
-            {
-                player.PlayerDie(false);
-            });
+
+            player.PlayerDie(false);
+
         }
         else
         {
@@ -110,10 +109,17 @@ public class Home : MonoBehaviour
             var npc = GameCenter.Instance.playerManager.NpcList[index];
             float moveTime = Vector3.Distance(npc.transform.position, diePoint.position) * distanceSpeed;
             npc.PlayBaseAnim(EnumAnim.NPC_MaskMove, true);
-            npc.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
+            if (isFall)
+            {
+                npc.transform.DOMove(diePoint.position, moveTime).OnComplete(() =>
+                {
+                    npc.NpcDie(isFall, NpcDead);
+                });
+            }
+            else
             {
                 npc.NpcDie(isFall, NpcDead);
-            });
+            }
             yield return new WaitForSeconds(1f);
         }
     }

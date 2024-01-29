@@ -64,6 +64,9 @@ public class Office : MonoBehaviour
 
     private void StartWork()
     {
+        var player = GameCenter.Instance.playerManager.Player;
+        player.PlayIdleAnim();
+        
         timePassOn = true;
         timer = 0;
         showTime = GameCenter.Instance.globalSettingSO.WorkShowTime;

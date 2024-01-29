@@ -114,14 +114,13 @@ public class SceneManager : MonoBehaviour
         GameCenter.Instance.uIManager.screenTransitionUI.EndTransition();
         var player = GameCenter.Instance.playerManager.Player;
 
-        bool loseHP = Random.Range(0, 100f) > 50f;
+        //bool loseHP = Random.Range(0, 100f) > 50f;
         var so = GameCenter.Instance.globalSettingSO;
         int value = Random.Range(so.WorkLoseMin, so.WorkLoseMax);
 
-        if (loseHP)
-            player.ChangeHP(-value);
-        else
-            player.ChangeSan(-value);
+
+        player.ChangeHP(-value);
+
 
         player.ChangeStatus(EnumPlayerStatus.Tired);
         player.PlayMoveAnim();
@@ -145,6 +144,13 @@ public class SceneManager : MonoBehaviour
         float y = Random.Range(minY, maxY);
         return new Vector3(x, y, 0);
     }
+
+    public Vector3 GetPlayerPos(int index)
+    {
+        index = Mathf.Clamp(index, 0, PlayerPos.Count - 1);
+        return PlayerPos[index].position;
+    }
+
 
 
 
